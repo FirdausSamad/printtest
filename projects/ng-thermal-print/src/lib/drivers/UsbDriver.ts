@@ -1,10 +1,12 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PrintDriver } from "./PrintDriver";
+import {PrintDriver} from './PrintDriver';
+
 declare var navigator: any;
+declare var USBDevice: any;
 
 export class UsbDriver extends PrintDriver {
-    private device: USBDevice;
-    private endPoint: USBEndpoint;
+    private device: any;
+    private endPoint: any;
     private vendorId: number;
     private productId: number;
     public isConnected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -17,7 +19,7 @@ export class UsbDriver extends PrintDriver {
 
     public connect() {
         navigator.usb.getDevices().then(devices => {
-            this.device = devices.find((device: USBDevice) => {
+            this.device = devices.find((device: any) => {
                 return device.vendorId === this.vendorId && device.productId === this.productId;
             });
             console.log(this.device);
@@ -31,7 +33,7 @@ export class UsbDriver extends PrintDriver {
                 let result = this.device.claimInterface(0);
                 return result;
             }).then(result => {
-                const endPoints: USBEndpoint[] = this.device.configuration.interfaces[0].alternate.endpoints;
+                const endPoints: any[] = this.device.configuration.interfaces[0].alternate.endpoints;
                 this.endPoint = endPoints.find((endPoint: any) => endPoint.direction === 'out');
                 this.isConnected.next(true);
                 this.listenForUsbConnections();
@@ -45,10 +47,10 @@ export class UsbDriver extends PrintDriver {
      * Request a USB device through the browser
      * return Observable<USBDevice>
      */
-    public requestUsb(): Observable<USBDevice> {
+    public requestUsb(): Observable<any> {
         return new Observable(observer => {
             navigator.usb.requestDevice({ filters: [] })
-                .then((result: USBDevice) => {
+                .then((result: any) => {
                     this.vendorId = result.vendorId;
                     this.productId = result.productId;
                     return observer.next(result);

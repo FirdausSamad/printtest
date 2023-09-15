@@ -1,6 +1,7 @@
-import { PrintService, UsbDriver, WebPrintDriver } from "ng-thermal-print";
+
 import { Component } from "@angular/core";
-import { PrintDriver } from "ng-thermal-print/lib/drivers/PrintDriver";
+import {UsbDriver, WebPrintDriver} from '../../projects/ng-thermal-print/src/lib/drivers';
+import {PrintService} from '../../projects/ng-thermal-print/src/lib/ng-thermal-print.service';
 
 @Component({
   selector: "app-root",
