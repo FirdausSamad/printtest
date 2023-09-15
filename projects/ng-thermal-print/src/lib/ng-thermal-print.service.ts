@@ -29,6 +29,8 @@ export class PrintService extends PrintBuilder {
     this.printLanguage = printLanguage;
     this.driver.connect();
 
+
+
     this.driver.isConnected.subscribe(result => {
       this.isConnected.next(result);
     });

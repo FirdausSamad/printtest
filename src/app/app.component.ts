@@ -20,6 +20,7 @@ export class AppComponent {
     this.printService.isConnected.subscribe((result) => {
       this.status = result;
       if (result) {
+
        alert("Connected to printer!!!");
       } else {
         alert("Not connected to printer.");
