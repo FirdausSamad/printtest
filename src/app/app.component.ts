@@ -13,6 +13,7 @@ export class AppComponent {
   usbPrintDriver: UsbDriver;
   webPrintDriver: WebPrintDriver;
   ip: string = "10.83.118.160";
+  testresult: any;
 
   constructor(private printService: PrintService) {
     this.usbPrintDriver = new UsbDriver();
@@ -31,7 +32,8 @@ export class AppComponent {
   requestUsb() {
     this.usbPrintDriver.requestUsb().subscribe(
       (result) => {
-        this.printService.setDriver(this.usbPrintDriver);
+        this.testresult =  result;
+        this.printService.setDriver(result);
       },
       (error) => {
         alert(error);
