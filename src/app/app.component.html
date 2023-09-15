@@ -1,6 +1,11 @@
-<strong>Status: {{status}}</strong>
+<strong>Status: {{ status }}</strong>
 <div>
-  <input [(ngModel)]="ip" type="text" name="ip" placeholder="IP of printer with WebPRNT">
+  <input
+    [(ngModel)]="ip"
+    type="text"
+    name="ip"
+    placeholder="IP of printer with WebPRNT"
+  />
   <button (click)="connectToWebPrint()">Connect to WebPRNT</button>
 </div>
 
@@ -8,14 +13,12 @@
   <button (click)="requestUsb()">Connect to USB</button>
 </div>
 
-
 <div>
-  <button (click)="print()"> Print!</button>
+  <button (click)="print()">Print!</button>
 </div>
 
+{{ this.usbPrintDriver | async | json }}
 
-{{this.usbPrintDriver | json}}
+{{ status | json }}
 
-{{status | json}}
-
-{{driverTest | json}}
+{{ driverTest | json }}
