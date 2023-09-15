@@ -20,9 +20,9 @@ export class AppComponent {
     this.printService.isConnected.subscribe((result) => {
       this.status = result;
       if (result) {
-        console.log("Connected to printer!!!");
+       alert("Connected to printer!!!");
       } else {
-        console.log("Not connected to printer.");
+        alert("Not connected to printer.");
       }
     });
   }
@@ -33,7 +33,7 @@ export class AppComponent {
         this.printService.setDriver(this.usbPrintDriver);
       },
       (error) => {
-        console.log(error);
+        alert(error);
       }
     );
   }
