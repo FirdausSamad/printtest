@@ -51,7 +51,8 @@ export class AppComponent {
         this.printService
           .init()
           .setBold(true).writeLine(res.companyName).setBold(false).feed(4)
-          .writeLine(res.companyPhone + '            ' + res.companyEmail).feed(4)
+          .writeLine(res.companyPhone).feed(2)
+          .writeLine(res.companyEmail).feed(4)
 
           .cut('full')
           .flush();
