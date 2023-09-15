@@ -1,8 +1,10 @@
-
 import { Component } from "@angular/core";
-import {UsbDriver, WebPrintDriver} from '../../projects/ng-thermal-print/src/lib/drivers';
-import {PrintService} from '../../projects/ng-thermal-print/src/lib/ng-thermal-print.service';
-import {PrintDriver} from '../../projects/ng-thermal-print/src/lib/drivers/PrintDriver';
+import {
+  UsbDriver,
+  WebPrintDriver,
+} from "../../projects/ng-thermal-print/src/lib/drivers";
+import { PrintService } from "../../projects/ng-thermal-print/src/lib/ng-thermal-print.service";
+import { PrintDriver } from "../../projects/ng-thermal-print/src/lib/drivers/PrintDriver";
 
 @Component({
   selector: "app-root",
@@ -13,40 +15,44 @@ export class AppComponent {
   status: boolean = false;
   usbPrintDriver: UsbDriver;
   webPrintDriver: WebPrintDriver;
-  ip: string = '';
+  ip: string = "";
   driverTest: PrintDriver;
 
   constructor(private printService: PrintService) {
     this.usbPrintDriver = new UsbDriver();
-    this.printService.isConnected.subscribe(result => {
+    this.printService.isConnected.subscribe((result) => {
       this.status = result;
       if (result) {
-        console.log('Connected to printer!!!');
+        console.log("Connected to printer!!!");
       } else {
-        console.log('Not connected to printer.');
+        console.log("Not connected to printer.");
       }
     });
   }
 
   requestUsb() {
-    this.usbPrintDriver.requestUsb().subscribe(result => {
-      this.printService.setDriver(this.usbPrintDriver, 'ESC/POS');
+    this.usbPrintDriver.requestUsb().subscribe((result) => {
+      console.log("====================================");
+      console.log(result);
+      console.log("====================================");
+      this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
     });
   }
 
   connectToWebPrint() {
     this.webPrintDriver = new WebPrintDriver(this.ip);
-    this.printService.setDriver(this.webPrintDriver, 'WebPRNT');
+    this.printService.setDriver(this.webPrintDriver, "WebPRNT");
   }
 
   print(driver?: PrintDriver) {
     this.driverTest = driver;
-    this.printService.init()
+    this.printService
+      .init()
       .setBold(true)
-      .writeLine('Hello World!')
+      .writeLine("Hello World!")
       .setBold(false)
       .feed(4)
-      .cut('full')
+      .cut("full")
       .flush();
   }
 }
