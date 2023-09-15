@@ -39,7 +39,7 @@ export class PrintService extends PrintBuilder {
       console.error(error);
     }
 
-    this.driver.isConnected.pipe(take(1)).subscribe((result) => {
+    this.driver.isConnected.subscribe((result) => {
       this.isConnected.next(result);
     });
 
