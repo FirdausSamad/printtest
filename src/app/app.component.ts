@@ -45,7 +45,7 @@ export class AppComponent {
   }
 
   print(driver?: PrintDriver) {
-    this.driverTest = driver;
+    this.driverTest = this.usbPrintDriver;
     this.printService
       .init()
       .setBold(true)
