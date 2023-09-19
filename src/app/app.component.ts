@@ -47,10 +47,7 @@ export class AppComponent {
 
   async print(driver?: PrintDriver) {
     this.driverTest = this.usbPrintDriver;
-
-    if (!this.printService.isConnected.getValue) {
-      await this.requestUsb();
-    }
+    await this.requestUsb();
     this.loadReceipt().subscribe(
       (res: ReceiptModel) => {
         console.log(res);
