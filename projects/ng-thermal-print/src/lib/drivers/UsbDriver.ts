@@ -53,6 +53,7 @@ export class UsbDriver extends PrintDriver {
         this.listenForUsbConnections();
       })
       .catch((result) => {
+        alert(JSON.stringify(result));
         this.isConnected.next(false);
       });
   }
@@ -66,11 +67,13 @@ export class UsbDriver extends PrintDriver {
       navigator.usb
         .requestDevice({ filters: [] })
         .then((result: any) => {
+          alert("requestusb ok: " + JSON.stringify(result));
           this.vendorId = result.vendorId;
           this.productId = result.productId;
           return observer.next(result);
         })
         .catch((error) => {
+          alert("requestusb err: " + JSON.stringify(error));
           return observer.error(error);
         });
     });
