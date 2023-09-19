@@ -33,11 +33,15 @@ export class AppComponent {
   }
 
   requestUsb() {
-    this.usbPrintDriver.requestUsb().subscribe((result) => {
-      console.log("====================================");
-      console.log(result);
-      console.log("====================================");
-      this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+    this.printService.isConnected.subscribe((isConnected) => {
+      if (!isConnected) {
+        this.usbPrintDriver.requestUsb().subscribe((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+          this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+        });
+      }
     });
   }
 
