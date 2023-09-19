@@ -22,6 +22,7 @@ export class AppComponent {
 
   constructor(private printService: PrintService, private http: HttpClient) {
     this.usbPrintDriver = new UsbDriver();
+    this.printService.setDriver(this.usbPrintDriver);
     this.printService.isConnected.subscribe((result) => {
       this.status = result;
       if (result) {
