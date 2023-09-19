@@ -19,6 +19,7 @@ export class AppComponent {
   webPrintDriver: WebPrintDriver;
   ip: string = "";
   driverTest: PrintDriver;
+  guid = new Date().getTime();
 
   constructor(private printService: PrintService, private http: HttpClient) {
     this.usbPrintDriver = new UsbDriver();
