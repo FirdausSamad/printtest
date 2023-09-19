@@ -64,7 +64,7 @@ export class UsbDriver extends PrintDriver {
    */
   public requestUsb(): Observable<any> {
     return new Observable((observer) => {
-      navigator.hid
+      navigator.usb
         .requestDevice({ filters: [{ vendorId: 1305 }] })
         .then((result: any) => {
           alert("requestusb ok: " + JSON.stringify(result));
