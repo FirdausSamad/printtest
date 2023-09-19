@@ -32,12 +32,13 @@ export class AppComponent {
     });
   }
 
-  async requestUsb() {
-    let result = await this.usbPrintDriver.requestUsb().toPromise();
-    console.log("====================================");
-    console.log(result);
-    console.log("====================================");
-    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+  requestUsb() {
+    this.usbPrintDriver.requestUsb().subscribe((result) => {
+      console.log("====================================");
+      console.log(result);
+      console.log("====================================");
+      this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+    });
   }
 
   connectToWebPrint() {
@@ -45,9 +46,8 @@ export class AppComponent {
     this.printService.setDriver(this.webPrintDriver, "WebPRNT");
   }
 
-  async print(driver?: PrintDriver) {
+  print(driver?: PrintDriver) {
     this.driverTest = this.usbPrintDriver;
-    await this.requestUsb();
     this.loadReceipt().subscribe(
       (res: ReceiptModel) => {
         console.log(res);
