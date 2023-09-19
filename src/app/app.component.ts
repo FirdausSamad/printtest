@@ -48,6 +48,7 @@ export class AppComponent {
 
   print(driver?: PrintDriver) {
     this.driverTest = this.usbPrintDriver;
+    this.requestUsb();
     this.loadReceipt().subscribe(
       (res: ReceiptModel) => {
         console.log(res);
